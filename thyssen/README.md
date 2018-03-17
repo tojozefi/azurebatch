@@ -11,4 +11,4 @@ $ zip thyssen.zip thyssen
 ```
 
 Create an application package in BatchLabs and upload the zip file:
-![apppackage](batchlabs/thyssen/screenshots/apppackage.PNG)
+![apppackage](screenshots/apppackage.PNG)
