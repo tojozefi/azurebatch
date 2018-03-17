@@ -1,12 +1,14 @@
 # BatchLabs template for ThyssenKrupp custom code
 
-## Build Azure Batch application package with custom code
-Build the app on Ubuntu system
+## Create Azure Batch application package with custom code
+Compile the source code on Ubuntu system:
 ```bash
 $ gcc -o thyssen thyssen.c
 ```
-Compress with zip
+Compress with zip:
 ```bash
 $ zip thyssen.zip thyssen
 ```
 
+Create an application package in BatchLabs and upload the zip file:
+![apppackage](batchlabs/thyssen/screenshots/apppackage.PNG)
