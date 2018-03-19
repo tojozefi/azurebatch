@@ -1,11 +1,11 @@
 # BatchLabs template for custom app with task per file scheduling
 
 ## 1. Create Azure Batch application package with custom code
-### Compile the source code on Ubuntu system:
+Compile the source code on Ubuntu system:
 ```bash
 $ gcc -o customcode customcode.c
 ```
-### Compress with zip:
+Compress with zip:
 ```bash
 $ zip customapp.zip customcode
 ```
@@ -13,4 +13,9 @@ $ zip customapp.zip customcode
 ![apppackage](screenshots/apppackage.PNG)
 
 ## 2. Create input file group
+Replicate the inputfile and copy to local folder:
+```bash
+$ mkdir input
+$ for i in `seq 1 20`; do cp inputfile input/file$i; done
+```
 Upload input files to input file group
