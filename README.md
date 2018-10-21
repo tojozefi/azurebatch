@@ -1,2 +1,2 @@
-# Batch Labs templates
-This repository contains Batch Labs templates for parallelizing custom applications on Azure Batch.
+# Azure Batch projects
+This repository contains Azure Batch content.
