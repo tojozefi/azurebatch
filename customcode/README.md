@@ -63,7 +63,9 @@ $ zip input.zip input? input10
 (In this example we're generating 10 identical input files with numbers from 1 to 500000)
 
 Goto *Data* tab in Batch Explorer and create a file group with the generated input files.
-Hint: You can create a file group and upload the input files directly from a local folder:
+
 ![input](screenshots/input-filegroup.png)
+
+Hint: You can create a file group and upload the input files directly from a local folder:
 ![input-fromfolder](screenshots/input-filegroup-fromfolder.png)
 
