@@ -1,5 +1,5 @@
 # Running custom code in parallel with Batch Explorer
-The aim of this workshop is to show how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates.
+The exercise shows how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates.
 
 ## Preparation
 ### 1. Create a Batch account
