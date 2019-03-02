@@ -96,13 +96,15 @@ Select OS image *Ubuntu 18.04* and virtual machine size *Standard_F1*:
 Select application package *factorize v1.0* and click *Save and close* button to create the pool.
 
 ### 6. Run the job from the template
-a. Create a local folder in your system for storing Batch Explorer templates, e.g. *C:\Users\User\Documents\batchexplorer\templates*. ⋅⋅⋅Unzip [factorize-template.zip](factorize-template.zip) package to this folder.
+a. Create a local folder in your system for storing Batch Explorer templates, e.g. *C:\Users\User\Documents\batchexplorer\templates*.
+Unzip [factorize-template.zip](factorize-template.zip) package to this folder.
 
 b. Goto *Gallery* tab in Batch Explorer and click *My library* button: 
 ![gallery-mylibrary](screenshots/gallery-mylibrary.png)
-⋅⋅⋅Add your template folder to the library:
+
+Add your template folder to the library:
 ![gallery-mylibrary-addfolder](screenshots/gallery-mylibrary-addfolder.png)
-⋅⋅⋅Find the job template in the left pane and open it:
+Find the job template in the left pane and open it:
 ![mylibrary-jobtemplate](screenshots/mylibrary-jobtemplate.png)
 
 c. Run the job template by clicking the green arrow button in the top-right corner:
@@ -110,15 +112,15 @@ c. Run the job template by clicking the green arrow button in the top-right corn
 
 d. In the job template form that opens select the pool and provide a name for the job:
 ![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
-⋅⋅⋅You may modify the output extension or select different filegroups for input or output in the appropriate fields, or leave the default values. 
-⋅⋅⋅Click *Run and close* button and wait for the job to start.
+You may modify the output extension or select different filegroups for input or output in the appropriate fields, or leave the default values. 
+Click *Run and close* button and wait for the job to start.
 
 e. Once the job is started Batch Explorer should open the job status page where you can monitor live the job progress:
 ![job-status](screenshots/job-status.png)
-⋅⋅⋅You can observe all the tasks created in the job and monitor their status.
-⋅⋅⋅Hint: You may want to check the status of the pool executing the job by clicking its link under the job name.
+You can observe all the tasks created in the job and monitor their status.
+Hint: You may want to check the status of the pool executing the job by clicking its link under the job name.
 
 f. After the job is finished goto *Data* tab and open the output filegroup:
 ![job-output](screenshots/job-output.png)
-⋅⋅⋅You can find the output and stdout+stderr log files of all tasks in *outputs* and *logs* folders under the job folder 
-⋅⋅⋅Hint: You can display the file content directly in Batch Explorer or download the files to your local system with the right-click context command.
+You can find the output and stdout+stderr log files of all tasks in *outputs* and *logs* folders under the job folder 
+Hint: You can display the file content directly in Batch Explorer or download the files to your local system with the right-click context command.
