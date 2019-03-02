@@ -1,5 +1,8 @@
 # Running custom code in parallel with Batch Explorer
-The exercise shows how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates.
+The exercise shows how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates. 
+
+Job templates are part of [Azure Batch CLI extension](https://github.com/Azure/azure-batch-cli-extensions/blob/master/README.rst) package, see [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/templates.md) for more information. 
+
 
 ## Preparation
 ### 1. Create a Batch account
@@ -94,6 +97,7 @@ Select OS image *Ubuntu 18.04* and virtual machine size *Standard_F1*:
 ![pool-form-2](screenshots/pool-form-2.png)
 
 Select application package *factorize v1.0* and click *Save and close* button to create the pool.
+![pool-form-3](screenshots/pool-form-3.png)
 
 ### 6. Run the job from the template
 a. Create a local folder in your system for storing Batch Explorer templates, e.g. *C:\Users\User\Documents\batchexplorer\templates*.
@@ -106,21 +110,29 @@ Add your template folder to the library:
 ![gallery-mylibrary-addfolder](screenshots/gallery-mylibrary-addfolder.png)
 Find the job template in the left pane and open it:
 ![mylibrary-jobtemplate](screenshots/mylibrary-jobtemplate.png)
+The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup, that processes this input file. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
+
+The job will process all files in the input filegroup and will produce output files with names being input filenames appended with a defined extension.
 
 c. Run the job template by clicking the green arrow button in the top-right corner:
 ![mylibrary-jobtemplate-run](screenshots/mylibrary-jobtemplate-run.png)
 
 d. In the job template form that opens select the pool and provide a name for the job:
 ![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
+Output extension is appended to the name of the input file to construct an output filename.
+
 You may modify the output extension or select different filegroups for input or output in the appropriate fields, or leave the default values. 
+
 Click *Run and close* button and wait for the job to start.
 
 e. Once the job is started Batch Explorer should open the job status page where you can monitor live the job progress:
 ![job-status](screenshots/job-status.png)
 You can observe all the tasks created in the job and monitor their status.
+
 Hint: You may want to check the status of the pool executing the job by clicking its link under the job name.
 
 f. After the job is finished goto *Data* tab and open the output filegroup:
 ![job-output](screenshots/job-output.png)
 You can find the output and stdout+stderr log files of all tasks in *outputs* and *logs* folders under the job folder 
-Hint: You can display the file content directly in Batch Explorer or download the files to your local system with the right-click context command.
+
+Hint: You can display the file content directly in Batch Explorer or download the files to your local system with the right-click download context command.
