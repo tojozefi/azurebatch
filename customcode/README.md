@@ -35,25 +35,28 @@ You should now see your Batch account on the Dashboard pane and the linked stora
 ## Custom code execution
 ### 1. Build the custom program
 The custom code used in our example is a simple C program [factorize.c](factorize.c) calculating factorization of integer numbers. 
-The program reads integers from an input file given as the first command-line argument and stores the result to an output file given as the 2nd command-line argument.
+The program reads integers from an input file provided as the first command-line argument and stores the result to an output file provided as the 2nd command-line argument.
 
-Compile the source code e.g. on a Ubuntu 18.04 system and get familiar with the program operation:
+Compile the source code e.g. on a Linux system and get familiar with the program operation:
 ```bash
 $ gcc -o factorize factorize.c
 $ ./factorize
 Missing command-line argument, syntax: ./factorize <input> <output>
 ```
-As an example, let's calculate factorization of all numbers from 1 to 500000:
+Tip: If you don't have a working Linux system at hand, you may want to use [Azure cloud shell](https://shell.azure.com) in your Azure account (select Bash)
+
+As an example, let's calculate factorization of all numbers from 1 to 100:
 ```bash
-$ seq 1 500000 > input
-$ ./factorize input output
-$ less output
+$ seq 1 100 > inputfile
+$ ./factorize inputfile outputfile
+$ less outputfile
 ```
 ### 2. Create application package
 1. Compress the program executable with zip:
 ```bash
 $ zip factorize.zip factorize
 ```
+Download the zip package to your local system.
 
 2. Create an Azure Batch application package
 
@@ -67,18 +70,19 @@ Click *Save and close* button to save the application package.
 
 ### 3. Create an input file group
 
-Generate the input files and download to local folder:
+Generate the input fileset for parallel calculation. In our example we're generating 10 identical input files with numbers from 1 to 500000:  
 ```bash
-$ mkdir input
-$ for i in `seq 1 10`; do cp input input$i; done
-$ zip input.zip input? input10
+$ mkdir input; cd input
+$ seq 1 500000 > input1
+$ for i in `seq 2 10`; do cp input1 input$i; done
+$ cd ..; zip input.zip input
 ```
-(In this example we're generating 10 identical input files with numbers from 1 to 500000)
+Download the zip file to your local system and uncompress. You should have a folder *input* with 10 input files inside. 
 
-Goto *Data* tab in Batch Explorer and create a file group with the generated input files.
+Goto *Data* tab in Batch Explorer and click '+' icon to create a new file group, selecting *From local folder (filegroup)*:
 ![input-filegroup](screenshots/input-filegroup.png)
 
-Hint: You can create a file group and upload the input files directly from a folder on your local system:
+Provide a name for the filegroup (e.g. *fgrp-input*), the path to *input* folder on your local system and confirm with *Create and close* button:
 ![input-fromfolder](screenshots/input-filegroup-fromfolder.png)
 
 ### 4. Create an output filegroup 
@@ -93,7 +97,7 @@ Goto *Pools* tab in Batch Explorer and click '+' icon to create a new pool.
 Provide the pool name e.g. *factorize-pool* and the amount of nodes e.g. *10*:
 ![pool-form-1](screenshots/pool-form-1.png)
 
-Select OS image *Ubuntu 18.04* and virtual machine size *Standard_F1*:
+Select OS image (equivalent to the Linux distribution that you used to build *factorize* program) and virtual machine size for the pool e.g. *Standard_F1*:
 ![pool-form-2](screenshots/pool-form-2.png)
 
 Select application package *factorize v1.0* and click *Save and close* button to create the pool.
@@ -102,16 +106,20 @@ Select application package *factorize v1.0* and click *Save and close* button to
 ### 6. Run the job from the template
 a. Create a local folder in your system for storing Batch Explorer templates an unzip [factorize-template.zip](factorize-template.zip) package to this folder.
 
-b. Goto *Gallery* tab in Batch Explorer and click *My library* button: 
+b. Load the *factorize* program's job template into Batch Explorer local gallery.
+
+Goto *Gallery* tab in Batch Explorer and click *My library* button: 
 ![gallery-mylibrary](screenshots/gallery-mylibrary.png)
 
 Add your template folder to the library:
 ![gallery-mylibrary-addfolder](screenshots/gallery-mylibrary-addfolder.png)
+
 Find *job.template.json* template under *factorize* folder the left pane and open it:
 ![mylibrary-jobtemplate](screenshots/mylibrary-jobtemplate.png)
+
 The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
 
-The tasks will process all files in the input filegroup.
+The tasks will process all files in the input filegroup in parallel and generate the relevant output files with names appended by defined extension.
 
 c. Run the job template by clicking the green arrow button in the top-right corner:
 ![mylibrary-jobtemplate-run](screenshots/mylibrary-jobtemplate-run.png)
@@ -120,7 +128,7 @@ d. In the job template form that opens select the pool and provide a name for th
 ![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
 Output extension is appended to the name of the input file to construct an output filename.
 
-You may want to modify the output extension or select different filegroups for input or output in the appropriate fields, or you may just leave the default values. 
+You may want to modify the output extension or input and output filegroups in the appropriate fields, or you may just leave the default values. 
 
 Click *Run and close* button and wait for the job to start.
 
