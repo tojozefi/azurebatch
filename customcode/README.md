@@ -100,19 +100,18 @@ Select application package *factorize v1.0* and click *Save and close* button to
 ![pool-form-3](screenshots/pool-form-3.png)
 
 ### 6. Run the job from the template
-a. Create a local folder in your system for storing Batch Explorer templates, e.g. *C:\Users\User\Documents\batchexplorer\templates*.
-Unzip [factorize-template.zip](factorize-template.zip) package to this folder.
+a. Create a local folder in your system for storing Batch Explorer templates an unzip [factorize-template.zip](factorize-template.zip) package to this folder.
 
 b. Goto *Gallery* tab in Batch Explorer and click *My library* button: 
 ![gallery-mylibrary](screenshots/gallery-mylibrary.png)
 
 Add your template folder to the library:
 ![gallery-mylibrary-addfolder](screenshots/gallery-mylibrary-addfolder.png)
-Find the job template in the left pane and open it:
+Find *job.template.json* template under *factorize* folder the left pane and open it:
 ![mylibrary-jobtemplate](screenshots/mylibrary-jobtemplate.png)
-The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup, that processes this input file. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
+The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
 
-The job will process all files in the input filegroup and will produce output files with names being input filenames appended with a defined extension.
+The tasks will process all files in the input filegroup.
 
 c. Run the job template by clicking the green arrow button in the top-right corner:
 ![mylibrary-jobtemplate-run](screenshots/mylibrary-jobtemplate-run.png)
@@ -121,7 +120,7 @@ d. In the job template form that opens select the pool and provide a name for th
 ![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
 Output extension is appended to the name of the input file to construct an output filename.
 
-You may modify the output extension or select different filegroups for input or output in the appropriate fields, or leave the default values. 
+You may want to modify the output extension or select different filegroups for input or output in the appropriate fields, or you may just leave the default values. 
 
 Click *Run and close* button and wait for the job to start.
 
