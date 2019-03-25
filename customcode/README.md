@@ -45,7 +45,7 @@ Missing command-line argument, syntax: ./factorize <input> <output>
 ```
 As an example, let's calculate factorization of all numbers from 1 to 500000:
 ```bash
-$ seq 1 10000 > input
+$ seq 1 500000 > input
 $ ./factorize input output
 $ less output
 ```
