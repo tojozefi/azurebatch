@@ -5,7 +5,16 @@ Job templates are part of [Azure Batch CLI extension](https://github.com/Azure/a
 
 
 ## Preparation
-### 1. Create a Batch account
+### 1. Redeem your Azure promo code
+1. To redeem your Azure promo code you need an email account not previously used for Azure. To set up a brand-new Microsoft account follow [these](Setup_Microsoft_account.pdf) instructions.
+
+2. Follow the instructions on [Azure pass redemption page](https://www.microsoftazurepass.com/Home/HowTo) to redeem your Azure promo code.
+
+Azure promo codes:
+1. ...
+2. ...
+
+### 2. Create a Batch account
 1. Login to [Azure portal](https://portal.azure.com), click on "Create a resource", type "batch service" in the search box and select *Batch service* from the list:
 ![batchaccount-create](screenshots/batchaccount-create.png)
 
@@ -18,7 +27,7 @@ Job templates are part of [Azure Batch CLI extension](https://github.com/Azure/a
 4. Click "Review+create" button and then "Create" to confirm creation of the Batch account:
 ![batchaccount-create-confirm](screenshots/batchaccount-create-confirm.png)
 
-### 2. Install Batch Explorer
+### 3. Install Batch Explorer
 *Note: Instructions below assume version 0.19.2 of Batch Explorer.*
 
 1. Goto [Batch Explorer](https://azure.github.io/BatchExplorer/) webpage and download the Batch Explorer installer package adequate for your OS system.
