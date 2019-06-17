@@ -1,0 +1,101 @@
+{
+    "templateMetadata":{
+        "description":"Job template for factorize program with file per task scheduling"
+    },
+    "parameters":{
+		"jobName":{
+             "type":"string",
+             "metadata":{
+                 "description":"The job name"
+             }
+         },
+        "outputExt":{
+            "type":"string",
+            "defaultValue":".out",
+            "metadata":{
+                "description":"The output files extension"
+            }
+        },
+        "inputFilegroup":{
+            "type":"string",
+			"defaultValue":"fgrp-input",
+            "metadata":{
+                "description":"The file group where the input files are stored.",
+                "advancedType":"file-group"
+            }
+        },
+        "outputFilegroup":{
+            "type":"string",
+		 "defaultValue":"fgrp-output",
+            "metadata":{
+                "description":"The file group where outputs will be stored",
+                "advancedType":"file-group"
+            }
+        }
+    },
+    "job":{
+        "type":"Microsoft.Batch/batchAccounts/jobs",
+        "properties":{
+            "id":"[parameters('jobName')]",
+            "displayName":"Custom job",
+            "onAllTasksComplete":"terminateJob",
+            "poolInfo": {
+                "poolId": "[parameters('poolId')]"
+            },
+            "taskFactory":{
+                "type":"taskPerFile",
+                "source":{
+                    "fileGroup": "[parameters('inputFilegroup')]"
+                },
+                "repeatTask":{
+                    "displayName":"Task for {fileName}",
+                    "commandLine":"$AZ_BATCH_APP_PACKAGE_factorize_1_0/factorize {fileName} {fileName}[parameters('outputExt')]",
+                    "resourceFiles": [
+                        {
+                            "blobSource": "{url}",
+                            "filePath": "{fileName}"
+                        }
+                    ],
+                    "outputFiles":[
+                        {
+                            "filePattern":"../stdout.txt",
+                            "destination":{
+                                "autoStorage":{
+                                    "fileGroup":"[parameters('outputFilegroup')]",
+                                    "path":"[parameters('jobName')]/logs/{fileName}.stdout.log"
+                                }
+                            },
+                            "uploadOptions":{
+                                "uploadCondition":"taskCompletion"
+                            }
+                        },
+                        {
+                            "filePattern":"../stderr.txt",
+                            "destination":{
+                                "autoStorage":{
+                                    "fileGroup":"[parameters('outputFilegroup')]",
+                                    "path":"[parameters('jobName')]/logs/{fileName}.stderr.log"
+                                }
+                            },
+                            "uploadOptions":{
+                                "uploadCondition":"taskCompletion"
+                            }
+                        },
+                        {
+                            "filePattern":"{fileName}[parameters('outputExt')]",
+                            "destination":{
+                                "autoStorage":{
+                                    "fileGroup":"[parameters('outputFilegroup')]",
+                                    "path":"[parameters('jobName')]/outputs/{fileName}[parameters('outputExt')]"
+                                }
+                            },
+                            "uploadOptions":{
+                                "uploadCondition":"taskSuccess"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
