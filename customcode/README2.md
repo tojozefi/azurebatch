@@ -11,10 +11,7 @@ Job templates are part of [Azure Batch CLI extension](https://github.com/Azure/a
 2. Follow the instructions on [Azure pass redemption page](https://www.microsoftazurepass.com/Home/HowTo) to redeem your Azure promo code.
 
 Azure promo codes:
-1.  QOFWCM4YDQ2GWVZN84
-2.  QOTSTUTU034ZGUJM31
-3.  QPLDWQ0RSRQSCGVO8O
-4.  QX2PQNWY2NQD4KF28R
+1.  ...
 
 ### 2. Create a Batch account
 1. Login to [Azure portal](https://portal.azure.com), click on "Create a resource", type "batch service" in the search box and select *Batch service* from the list:
