@@ -130,7 +130,7 @@ Usage: source set_batch_env.sh resourcegroup batchaccount
 
 Example command for resource group "datasharding" and Batch account "datasharding": 
 ```bash
-source set_batch_env.sh datasharding datasharding
+$ source set_batch_env.sh datasharding datasharding
 ```
 After the command completes you should have the following variables defined in your environment: AZURE_BATCH_ACCOUNT, AZURE_BATCH_ENDPOINT and AZURE_BATCH_KEY:
 ```bash
