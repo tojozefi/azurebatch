@@ -1,6 +1,6 @@
 # Data sharding to multiple blob storage accounts
-This repo contains a recipe and scripts for massive data upload to multiple blob storage accounts with data sharding.  
-It's an example implementation of [official guidance](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-performance-checklist#upload-many-blobs-quickly) for quick upload of massive amount of data to blob storage, utilizing Azure Batch service for parallel data upload with [azcopy](https://aka.ms/azcopy) utility to multiple blob storage accounts for maximizing ingress throughput.
+This repository contains a recipe and scripts for massive data upload to multiple blob storage accounts with data sharding.  
+It's an example implementation of [official guidance](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-performance-checklist#upload-many-blobs-quickly) for quick upload of massive amount of data to blob storage, utilizing [Azure Batch service](https://azure.microsoft.com/en-us/services/batch/) for parallel data upload with [azcopy](https://aka.ms/azcopy) utility to multiple blob storage accounts - for maximizing ingress throughput.
 
 You may find it useful if:
 - you need to upload massive amount of data to blob storage quickly
