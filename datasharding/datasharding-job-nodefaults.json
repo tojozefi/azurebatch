@@ -1,0 +1,126 @@
+{
+    "templateMetadata":{
+        "description":"Job template for data sharding job"
+    },
+    "parameters":{
+        "jobName":{
+             "type":"string",
+             "metadata":{
+                 "description":"Job name"
+             }
+         },
+        "poolId": {
+            "type": "string",
+            "metadata": {
+                "description": "Pool id"
+            }
+        },
+        "dataSource": {
+            "type": "string",
+            "metadata": {
+                "description": "Source data file name"
+            }
+        },
+        "saPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage account name prefix"
+            }
+        },
+        "container": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage account container"
+            }
+        },
+        "sasKeyFile": {
+            "type": "string",
+            "metadata": {
+                "description": "File with storage account SAS keys"
+            }
+        },
+        "nrOfAccounts": {
+            "type": "string",
+            "metadata": {
+                "description": "Number of storage accounts"
+            }
+        },
+        "endIndex":{
+            "type":"int",
+            "metadata":{
+                "description":"End index"
+            }
+        },
+        "assetFilegroup":{
+            "type":"string",
+            "metadata":{
+                "description":"The file group with job assets",
+                "advancedType":"file-group"
+            }
+        },
+        "outputFilegroup":{
+            "type":"string",
+            "metadata":{
+                "description":"The file group for outputs",
+                "advancedType":"file-group"
+            }
+        }
+    },
+    "job":{
+        "type":"Microsoft.Batch/batchAccounts/jobs",
+        "properties":{
+            "id":"[parameters('jobName')]",
+            "onAllTasksComplete":"terminateJob",
+            "poolInfo": {
+                "poolId": "[parameters('poolId')]"
+            },
+			"taskFactory": {
+                "type":"parametricSweep",
+				"parameterSets": [
+                    {
+                        "start": 1,
+                        "end": "[parameters('nrOfAccounts')]",
+                        "step": 1
+                    }
+                ],
+				"repeatTask":{
+					"displayName":"Task {0}",
+					"commandLine":"./datasharding-runscript.sh [parameters('dataSource')] [parameters('saPrefix')] [parameters('container')] [parameters('nrOfAccounts')] [parameters('sasKeyFile')] {0} [parameters('endIndex')]",
+					"resourceFiles": [
+						{
+							"source":{
+								"fileGroup": "[parameters('assetFilegroup')]"
+							}
+						}
+					],
+					"outputFiles":[
+						{
+							"filePattern":"../stdout.txt",
+							"destination":{
+								"autoStorage":{
+									"fileGroup":"[parameters('outputFilegroup')]",
+									"path":"[parameters('jobName')]/{0}-stdout.txt"
+								}
+							},
+							"uploadOptions":{
+								"uploadCondition":"taskCompletion"
+							}
+						},
+						{
+							"filePattern":"../stderr.txt",
+							"destination":{
+								"autoStorage":{
+									"fileGroup":"[parameters('outputFilegroup')]",
+									"path":"[parameters('jobName')]/{0}-stderr.txt"
+								}
+							},
+							"uploadOptions":{
+								"uploadCondition":"taskCompletion"
+							}
+						}
+					]
+				}
+            }
+        }
+    }
+}

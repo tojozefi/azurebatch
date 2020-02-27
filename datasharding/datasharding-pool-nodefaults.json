@@ -1,0 +1,76 @@
+{
+    "templateMetadata":{
+        "description":"Pool template for data sharding"
+    },
+    "parameters": {
+        "poolId": {
+            "type": "string",
+            "metadata": {
+                "description": "Azure Batch pool id"
+            }
+        },
+        "vmDedicatedCount": {
+            "type": "int",
+            "metadata": {
+                "description": "Number of dedicated virtual machines"
+            }
+        },
+        "maxTasksPerNode": {
+            "type": "int",
+            "metadata": {
+                "description": "Maximum tasks per node"
+            }
+        },
+        "dataSampleSize":{
+            "type":"string",
+            "metadata":{
+                "description":"Data sample size"
+            }
+        },
+        "assetFilegroup":{
+            "type":"string",
+            "metadata":{
+                "description":"File group with datasharding pool assets",
+                "advancedType":"file-group"
+            }
+        }
+},
+    "pool": {
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "apiVersion": "2016-12-01",
+        "properties": {
+            "id": "[parameters('poolId')]",
+            "virtualMachineConfiguration": {
+                "imageReference": { 
+                    "publisher": "openlogic",
+                    "offer": "centos",
+                    "sku": "7.7"
+                },
+                "nodeAgentSKUId": "batch.node.centos 7"
+            },
+            "vmSize": "STANDARD_D64_v3",
+            "maxTasksPerNode": "[parameters('maxTasksPerNode')]",
+            "targetDedicatedNodes": "[parameters('vmDedicatedCount')]",
+            "startTask": {
+                "commandLine":"./datasharding-starttask.sh [parameters('dataSampleSize')]",
+                "resourceFiles": [ 
+					{
+						"source":{
+							"fileGroup": "[parameters('assetFilegroup')]"
+						}
+					}
+                ],
+                "environmentSettings": [ ],
+                "userIdentity": {
+                    "autoUser": {
+                        "scope":"pool",
+                        "elevationLevel":"admin"
+                    }
+                },	
+                "maxTaskRetryCount":0,
+                "waitForSuccess":true
+            },
+            "applicationPackageReferences": [ ]
+        }
+    }
+}
