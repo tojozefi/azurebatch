@@ -110,7 +110,7 @@ Hint: you can jump directly to the job's pool by clicking the pool link at the t
 ![datasharding-job-poollink](screenshots/datasharding-job-poollink.png)
  
 You can also click into each task to observe its status:
-![datasharding-job-poollink](screenshots/datasharding-job-poollink.png)
+![datasharding-job-tasklink](screenshots/datasharding-job-tasklink.png)
 You can follow task progress e.g. by opening its stdout stream in *stdout.txt* file:
 ![datasharding-job-task-stdout](screenshots/datasharding-job-task-stdout.png)
 
