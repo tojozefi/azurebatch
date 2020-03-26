@@ -112,7 +112,12 @@ Select OS image (equivalent to the Linux distribution that you used to build *fa
 Select application package *factorize v1.0* and click *Save and close* button to create the pool.
 ![pool-form-3](screenshots/pool-form-3.png)
 
-### 6. Run the job from the template
+### 6. Run the *factorize* job using a job template 
+The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
+
+The tasks will process all files in the input filegroup in parallel and generate the relevant output files with names appended by defined extension.
+
+#### 6a. Run the job using Batch Explorer local gallery template
 a. Create a local folder in your system for storing Batch Explorer templates an unzip [factorize-template.zip](factorize-template.zip) package to this folder.
 
 b. Load the *factorize* program's job template into Batch Explorer local gallery.
@@ -126,10 +131,6 @@ Add your template folder to the library:
 Find *job.template.json* template under *factorize* folder the left pane and open it:
 ![mylibrary-jobtemplate](screenshots/mylibrary-jobtemplate.png)
 
-The job template used in our example implements a task-per-file task factory which generates a task for each file in the defined input filegroup. See [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/taskFactories.md) for more information about task factories.   
-
-The tasks will process all files in the input filegroup in parallel and generate the relevant output files with names appended by defined extension.
-
 c. Run the job template by clicking the green arrow button in the top-right corner:
 ![mylibrary-jobtemplate-run](screenshots/mylibrary-jobtemplate-run.png)
 
@@ -141,14 +142,29 @@ You may want to modify the output extension or input and output filegroups in th
 
 Click *Run and close* button and wait for the job to start.
 
-e. Once the job is started Batch Explorer should open the job status page where you can monitor live the job progress:
-![job-status](screenshots/job-status.png)
-You can observe all the tasks created in the job and monitor their status.
+#### 6b. Run the job using a local template
+a. Download the *factorize* program's [job template](factorize-job.json) to the local filesystem.
 
+b. Load the *factorize* program's job template into Batch Explorer.
+
+Goto *Gallery* tab in Batch Explorer and click *Pick a local template* button: 
+![gallery-localtemplate](screenshots/gallery-picklocaltemplate.png)
+
+c. In the job template form that opens select the pool and provide a name for the job:
+![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
+Output extension is appended to the name of the input file to construct an output filename.
+
+You may want to modify the output extension or input and output filegroups in the appropriate fields, or you may just leave the default values. 
+
+Click *Run and close* button and wait for the job to start.
+
+### 7. Monitor the job execution
+Once the job is started Batch Explorer should open the job status page where you can monitor live the job progress:
+![job-status](screenshots/job-status.png)
+You can observe all the tasks created in the job and monitor their status.  
 Hint: You may want to check the status of the pool executing the job by clicking its link under the job name.
 
-f. After the job is finished goto *Data* tab and open the output filegroup:
+After the job is finished goto *Data* tab and open the output filegroup:
 ![job-output](screenshots/job-output.png)
-You can find the output and stdout+stderr log files of all tasks in *outputs* and *logs* folders under the job folder 
-
+You can find the output and stdout+stderr log files of all tasks in *outputs* and *logs* folders under the job folder.  
 Hint: You can display the file content directly in Batch Explorer or download the files to your local system with the right-click download context command.
