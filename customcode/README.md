@@ -96,7 +96,23 @@ The job template used in our example implements a task-per-file task factory whi
 
 The tasks will process all files in the input filegroup in parallel and generate the relevant output files with names appended by defined extension.
 
-#### 6a. Run the job using Batch Explorer local gallery template
+#### 6a. Run the job using a local template
+a. Download the *factorize* program's [job template](factorize-job.json) to the local filesystem.
+
+b. Load the *factorize* program's job template into Batch Explorer.
+
+Goto *Gallery* tab in Batch Explorer and click *Pick a local template* button: 
+![gallery-localtemplate](screenshots/gallery-picklocaltemplate.png)
+
+c. In the job template form that opens select the pool and provide a name for the job:
+![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
+Output extension is appended to the name of the input file to construct an output filename.
+
+You may want to modify the output extension or input and output filegroups in the appropriate fields, or you may just leave the default values. 
+
+Click *Run and close* button and wait for the job to start.
+
+#### 6b. Run the job using Batch Explorer local gallery template
 a. Create a local folder in your system for storing Batch Explorer templates an unzip [factorize-template.zip](factorize-template.zip) package to this folder.
 
 b. Load the *factorize* program's job template into Batch Explorer local gallery.
@@ -114,22 +130,6 @@ c. Run the job template by clicking the green arrow button in the top-right corn
 ![mylibrary-jobtemplate-run](screenshots/mylibrary-jobtemplate-run.png)
 
 d. In the job template form that opens select the pool and provide a name for the job:
-![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
-Output extension is appended to the name of the input file to construct an output filename.
-
-You may want to modify the output extension or input and output filegroups in the appropriate fields, or you may just leave the default values. 
-
-Click *Run and close* button and wait for the job to start.
-
-#### 6b. Run the job using a local template
-a. Download the *factorize* program's [job template](factorize-job.json) to the local filesystem.
-
-b. Load the *factorize* program's job template into Batch Explorer.
-
-Goto *Gallery* tab in Batch Explorer and click *Pick a local template* button: 
-![gallery-localtemplate](screenshots/gallery-picklocaltemplate.png)
-
-c. In the job template form that opens select the pool and provide a name for the job:
 ![mylibrary-jobtemplate-runform](screenshots/mylibrary-jobtemplate-runform.png)
 Output extension is appended to the name of the input file to construct an output filename.
 
