@@ -1,42 +1,21 @@
 # Running custom code in parallel with Batch Explorer
-The exercise shows how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates. 
-
+The exercise shows how to run a custom program code at scale on Azure Batch, using Batch Explorer and job templates.   
 Job templates are part of [Azure Batch CLI extension](https://github.com/Azure/azure-batch-cli-extensions/blob/master/README.rst) package, see [here](https://github.com/Azure/azure-batch-cli-extensions/blob/master/doc/templates.md) for more information. 
 
 
 ## Preparation
-### 1. Redeem your Azure promo code
-1. To redeem your Azure promo code you need an email account not previously used for Azure. To set up a brand-new Microsoft account follow [these](Setup_Microsoft_account.pdf) instructions.
+1. Create a Batch account as described [here](https://docs.microsoft.com/en-us/azure/batch/batch-account-create-portal#create-a-batch-account).   
+Use "Batch service" pool allocation mode in step f.
 
-2. Follow the instructions on [Azure pass redemption page](https://www.microsoftazurepass.com/Home/HowTo) to redeem your Azure promo code.
+2. Install Batch Explorer   
 
-Azure promo codes:
-1. ...
-2. ...
+a. Goto [Batch Explorer](https://azure.github.io/BatchExplorer/) webpage and download the Batch Explorer installer package adequate for your OS system.
+![batchexplorer](screenshots/batchexplorer.png)   
 
-### 2. Create a Batch account
-1. Login to [Azure portal](https://portal.azure.com), click on "Create a resource", type "batch service" in the search box and select *Batch service* from the list:
-![batchaccount-create](screenshots/batchaccount-create.png)
+b. Install Batch Explorer package (action is OS-dependent)
+Tip: You may want to download a portable zip package and unzip instead of performing a full install.   
 
-2. Click "Create" button and fill out the Batch account creation form.
-![batchaccount-create-form](screenshots/batchaccount-create-form.png)
-
-3. Click "Select storage account" and create a storage account linked to your Batch account:
-![batchaccount-create-storage](screenshots/batchaccount-create-storage.png)
-
-4. Click "Review+create" button and then "Create" to confirm creation of the Batch account:
-![batchaccount-create-confirm](screenshots/batchaccount-create-confirm.png)
-
-### 3. Install Batch Explorer
-*Note: Instructions below assume version 0.19.2 of Batch Explorer.*
-
-1. Goto [Batch Explorer](https://azure.github.io/BatchExplorer/) webpage and download the Batch Explorer installer package adequate for your OS system.
-![batchexplorer](screenshots/batchexplorer.png)
-
-2. Install Batch Explorer package (action is OS-dependent)
-Tip: You may want to download a portable zip package and unzip instead of performing a full install.
-
-3. Start Batch Explorer (run BatchExplorer.exe or its Linux/iOS equivalent) and login to your Azure account:
+c. Start Batch Explorer (run BatchExplorer.exe or its Linux/iOS equivalent) and login to your Azure account:
 ![accountlogin](screenshots/accountlogin.png)
 You should now see your Batch account on the Dashboard pane and the linked storage account in the top-right corner:
 ![batchexplorer-dashboard](screenshots/batchexplorer-dashboard.png)
