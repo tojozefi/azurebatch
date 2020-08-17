@@ -63,7 +63,7 @@ Generate the input fileset for parallel calculation. In our example we're genera
 $ mkdir input; cd input
 $ seq 1 500000 > input1
 $ for i in `seq 2 10`; do cp input1 input$i; done
-$ cd ..; zip input.zip input
+$ cd ..; zip -r input.zip input
 ```
 Download the zip file to your local system and uncompress. You should have a folder *input* with 10 input files inside. 
 
